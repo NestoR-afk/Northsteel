@@ -25,9 +25,13 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.findById(id);
     }
 
-    public Note save(Note note) {
-        Note newNote = new Note(note.getHeader(), note.getText());
-        return noteRepository.save(newNote);
+    public Optional<Note> save(Note note) {
+        try {
+            Note newNote = new Note(note.getHeader(), note.getText());
+            return Optional.of(noteRepository.save(newNote));
+        } catch(Exception e) {
+            return Optional.empty();
+        }
     }
 
     public Optional<Note> update(Long id, Note note) {
@@ -35,6 +39,7 @@ public class NoteServiceImpl implements NoteService {
 
         if (noteOptional.isPresent()) {
             Note updatedNote = noteOptional.get();
+            updatedNote.setId(id);
             updatedNote.setHeader(note.getHeader());
             updatedNote.setText(note.getText());
             return Optional.of(noteRepository.save(updatedNote));

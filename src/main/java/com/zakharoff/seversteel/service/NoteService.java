@@ -11,7 +11,7 @@ public interface NoteService {
 
     Optional<Note> findById(Long id);
 
-    Note save(Note note);
+    Optional<Note> save(Note note);
 
     Optional<Note> update(Long id, Note note);
 

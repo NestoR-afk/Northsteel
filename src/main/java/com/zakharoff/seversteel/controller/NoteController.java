@@ -26,24 +26,18 @@ public class NoteController {
         return new ResponseEntity<>(notes, HttpStatus.OK);
     }
 
-    @GetMapping("/notes/{id}")
-    public ResponseEntity<Note> getNote(@PathVariable Long id) {
-        Optional<Note> noteData = noteService.findById(id);
-
-        if (noteData.isPresent()) {
-            return new ResponseEntity<>(noteData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PostMapping("/notes")
     public ResponseEntity<Note> createNote(@RequestBody Note noteBody) {
-        Note note = noteService.save(noteBody);
-        return new ResponseEntity<>(note, HttpStatus.CREATED);
+            Optional<Note> noteOptional = noteService.save(noteBody);
+
+            if (noteOptional.isPresent()) {
+                return new ResponseEntity<>(noteOptional.get(), HttpStatus.CREATED);
+            } else  {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
     }
 
-    @PutMapping("/notes/{id}")
+    @PatchMapping("/notes/{id}")
     public ResponseEntity<Note> updateNote(@PathVariable("id") long id, @RequestBody Note noteBody) {
         Optional<Note> updatedNote = noteService.update(id, noteBody);
 
