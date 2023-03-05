@@ -11,6 +11,7 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String header;
+    @Column(length = 1000)
     private String text;
 
     public Note() {
