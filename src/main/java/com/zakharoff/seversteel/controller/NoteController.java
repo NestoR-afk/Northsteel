@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController()
+@CrossOrigin("http://localhost:3000")
 public class NoteController {
     private final NoteService noteService;
 
