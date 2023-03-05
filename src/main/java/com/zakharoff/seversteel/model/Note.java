@@ -13,13 +13,15 @@ public class Note {
     private String header;
     @Column(length = 1000)
     private String text;
+    private String fontFamily;
 
     public Note() {
     }
 
-    public Note(String header, String text) {
+    public Note(String header, String text, String fontFamily) {
         this.header = header;
         this.text = text;
+        this.fontFamily = fontFamily;
     }
 }
 
