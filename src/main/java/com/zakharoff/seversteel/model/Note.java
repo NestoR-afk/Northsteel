@@ -15,15 +15,18 @@ public class Note {
     private String text;
     private String fontFamily;
     private Integer fontSize;
+    @Column(length = Integer.MAX_VALUE)
+    private String image;
 
     public Note() {
     }
 
-    public Note(String header, String text, String fontFamily, Integer fontSize) {
+    public Note(String header, String text, String fontFamily, Integer fontSize, String image) {
         this.header = header;
         this.text = text;
         this.fontFamily = fontFamily;
         this.fontSize = fontSize;
+        this.image = image;
     }
 }
 

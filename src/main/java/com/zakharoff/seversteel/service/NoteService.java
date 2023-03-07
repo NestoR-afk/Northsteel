@@ -23,7 +23,11 @@ public class NoteService {
 
     public Optional<Note> save(Note note) {
         try {
-            Note newNote = new Note(note.getHeader(), note.getText(), note.getFontFamily(), note.getFontSize());
+            Note newNote = new Note(note.getHeader(),
+                    note.getText(),
+                    note.getFontFamily(),
+                    note.getFontSize(),
+                    note.getImage());
             return Optional.of(noteRepository.save(newNote));
         } catch(Exception e) {
             return Optional.empty();
@@ -39,6 +43,7 @@ public class NoteService {
             updatedNote.setHeader(note.getHeader());
             updatedNote.setText(note.getText());
             updatedNote.setFontFamily(note.getFontFamily());
+            updatedNote.setImage(note.getImage());
             return Optional.of(noteRepository.save(updatedNote));
         } else {
             return Optional.empty();
