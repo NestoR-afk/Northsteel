@@ -14,14 +14,16 @@ public class Note {
     @Column(length = 1000)
     private String text;
     private String fontFamily;
+    private Integer fontSize;
 
     public Note() {
     }
 
-    public Note(String header, String text, String fontFamily) {
+    public Note(String header, String text, String fontFamily, Integer fontSize) {
         this.header = header;
         this.text = text;
         this.fontFamily = fontFamily;
+        this.fontSize = fontSize;
     }
 }
 

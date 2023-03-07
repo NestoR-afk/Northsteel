@@ -18,7 +18,7 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Note note = new Note("Добро пожаловать в заметки!",
-                "Здесь вы можете записывать важные события, чтобы не забыть их.", null);
+                "Здесь вы можете записывать важные события, чтобы не забыть их.", "Roboto", 14);
         noteService.save(note);
     }
 }
