@@ -29,23 +29,23 @@ public class NoteController {
 
     @PostMapping("/notes")
     public ResponseEntity<Note> createNote(@RequestBody Note noteBody) {
-            Optional<Note> noteOptional = noteService.save(noteBody);
+        Optional<Note> noteOptional = noteService.save(noteBody);
 
-            if (noteOptional.isPresent()) {
-                return new ResponseEntity<>(noteOptional.get(), HttpStatus.CREATED);
-            } else  {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        if (noteOptional.isPresent()) {
+            return new ResponseEntity<>(noteOptional.get(), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @PatchMapping("/notes/{id}")
+    @PutMapping("/notes/{id}")
     public ResponseEntity<Note> updateNote(@PathVariable("id") long id, @RequestBody Note noteBody) {
         Optional<Note> updatedNote = noteService.update(id, noteBody);
 
         if (updatedNote.isPresent()) {
             return new ResponseEntity<>(updatedNote.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

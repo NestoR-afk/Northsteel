@@ -23,9 +23,9 @@ public class NoteService {
 
     public Optional<Note> save(Note note) {
         try {
-            Note newNote = new Note(note.getHeader(), note.getText(), note.getFontFamily(), note.getFontSize());
-            return Optional.of(noteRepository.save(newNote));
-        } catch(Exception e) {
+            Note newNote = noteRepository.save(note);
+            return Optional.of(newNote);
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
@@ -33,14 +33,19 @@ public class NoteService {
     public Optional<Note> update(Long id, Note note) {
         Optional<Note> noteOptional = noteRepository.findById(id);
 
-        if (noteOptional.isPresent()) {
-            Note updatedNote = noteOptional.get();
-            updatedNote.setId(id);
-            updatedNote.setHeader(note.getHeader());
-            updatedNote.setText(note.getText());
-            updatedNote.setFontFamily(note.getFontFamily());
-            return Optional.of(noteRepository.save(updatedNote));
-        } else {
+        try {
+            if (noteOptional.isPresent()) {
+                Note updatedNote = noteOptional.get();
+                updatedNote.setHeader(note.getHeader());
+                updatedNote.setText(note.getText());
+                updatedNote.setFontFamily(note.getFontFamily());
+                updatedNote.setImage(note.getImage());
+                return Optional.of(noteRepository.save(updatedNote));
+            } else {
+                note.setId(id);
+                return Optional.of(noteRepository.save(note));
+            }
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
