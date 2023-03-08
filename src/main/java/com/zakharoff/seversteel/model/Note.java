@@ -1,11 +1,17 @@
 package com.zakharoff.seversteel.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Table(schema = "web")
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(setterPrefix = "with")
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,16 +23,5 @@ public class Note {
     private Integer fontSize;
     @Column(length = Integer.MAX_VALUE)
     private String image;
-
-    public Note() {
-    }
-
-    public Note(String header, String text, String fontFamily, Integer fontSize, String image) {
-        this.header = header;
-        this.text = text;
-        this.fontFamily = fontFamily;
-        this.fontSize = fontSize;
-        this.image = image;
-    }
 }
 
